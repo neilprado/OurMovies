@@ -1,0 +1,89 @@
+body {
+    background: rgba(45,55,64,1);
+    background: -moz-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(45,55,64,1)), color-stop(55%, rgba(45,55,64,1)), color-stop(85%, rgba(100,100,101,1)), color-stop(86%, rgba(102,102,102,1)), color-stop(100%, rgba(45,55,64,1)));
+    background: -webkit-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
+    background: -o-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
+    background: -ms-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
+    background: linear-gradient(to right, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d3740', endColorstr='#8B9492', GradientType=1 );
+    color: #f5f6f0;
+}
+
+a{
+    color: #f5f6f0;
+}
+
+.topo{
+    background-color: rgba(139,148,146, .1);
+    margin-top: 25px;
+    max-width: 95%;
+    height: 80px;
+}
+
+.logo{
+    background-color: transparent;
+    height: 80px;
+    padding-left: 50px;
+    
+}
+
+.menu-principal {
+    display: flex;
+    align-items: center;
+    
+}
+
+.menu-principal .nav-link {
+    padding: 5px 20px;
+    transition: .6;
+}
+
+.nav-link:hover {
+    color: #E08D4F;
+}
+
+.btn-outline-success{
+    color: #f5f6f0;
+    border-color: #E08D4F;
+}
+
+.btn:hover{
+    background-color: rgba(224,141,79, .8);
+    border-color: #E08D4F;
+}
+
+.filmes{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+    text-align: center;
+}
+
+.imgFilme img{
+    margin: 10px;
+    height: 320px;
+}
+
+.popularity {
+    width: 20%;
+    margin: 0;
+    padding: 10px;
+    background-color: #E08D4F;
+    border-radius: 50%;
+    font-weight: 900;
+    position: relative;
+    bottom: 15%;
+    left: 80%;
+    box-shadow: 1px 2px #8B9492;
+}
+
+.titlePopular{
+    position: relative;
+    bottom: 10%;
+}
+
+.menu-secundario{
+    margin-top: 10px;
+    margin right: 20px;
+}

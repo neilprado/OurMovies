@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Icons -->
+
+  <title>OurMovies.com</title>
+</head>
+
+<body>
+  <header class="container topo">
+    <div class="row">
+      <div class="col-3">
+        <img class="logo" src="img/ourmovies.png" alt="">
+      </div>
+      <ul class="nav justify-content-center col-6 menu-principal">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="popular-movies" href="#">Populares</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="upcoming-movies" href="#">Próximas estreias</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="now-playing" href="#">Em cartaz</a>
+        </li>
+      </ul>
+      <nav class="navbar navbar-light col-3">
+        <form class="form-inline busca">
+          <input class="form-control mr-sm-2" id="search" type="search" placeholder="Nome do Filme" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" id="button" type="submit">Busca</button>
+        </form>
+      </nav>
+    </div>
+  </header>
+  <main class="container">
+    <div class="row">
+      <nav class="nav flex-column col-1 menu-secundario">
+        <h5>Gêneros</h5>
+        <a class="nav-link active" href="#">Ação</a>
+        <a class="nav-link" href="#">Aventura</a>
+        <a class="nav-link" href="#">Animação</a>
+        <a class="nav-link" href="#">Comédia</a>
+        <a class="nav-link" href="#">Romance</a>
+        <a class="nav-link" href="#">Terror</a>
+      </nav>
+      <div class="col-9 filmes"></div>
+    </div>
+  </main>
+  <footer>
+    <div id="infoFilme"></div>
+  </footer>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

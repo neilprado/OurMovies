@@ -29,18 +29,25 @@ const getPopularMovies = () => {
     })
 
   const responsePopular = (data) => (
-    data.results.map(item => (
-      `
-      <div class="imgFilme">
+    data.results/*.filter(() => 'vote_average' > 5.0
+      )*/.map(item => (
+      `<div class="imgFilme">
         <a href="#" onclick="getMovieInfo(${item.id})">
           <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
         </a>
       <div class="popularity">${item.vote_average}</div>
-      <div class="nameFilme titlePopular">${item.title}</div></div>
-      `
+      <div class="nameFilme titlePopular">${item.title}</div></div>`
     )).join('')
   )
 }
+
+/*const filteredPopular = (pop) => {
+  fetch(popularMovies)
+    .then(resposta => resposta.json())
+    .then((data) =>{
+      return ${pop.vote_average} > 5.0
+    })
+}*/
 
 const getMovieInfo = (id) => {
   const infoMovie = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR`
@@ -63,7 +70,7 @@ const getUpcomingMovies = () => {
       filmes.innerHTML = responseUpcoming(data);
     });
 
-  function responseUpcoming(data) {
+  const responseUpcoming = (data) => {
     return data.results
       .map(
         item =>
@@ -89,19 +96,19 @@ const getUpcomingMovies = () => {
 //     })
 // }
 
-upcoming.addEventListener('click', function() {
+upcoming.addEventListener('click', () => {
   getUpcomingMovies()
 })
 
-// Função para retorno do que está em cartaz, falta realização de filtros!!
-function getPlayingNow() {
+// Função para retorno do que está em cartaz, falta realização de filtros de data!!
+const getPlayingNow = () => {
   fetch(nowPlayingMovies)
     .then(resposta => resposta.json())
-    .then(function(data) {
+    .then((data) => {
       filmes.innerHTML = responseNow(data)
     })
 
-  function responseNow(data) {
+  const responseNow = (data) => {
     return data.results
       .map(
         item =>
@@ -112,19 +119,18 @@ function getPlayingNow() {
       .join('')
   }
 }
-now.addEventListener('click', function() {
+now.addEventListener('click', () => {
   getPlayingNow()
 })
 
-// Função para retorno da busca do formulário
-function searchMovies() {
+// Função para retorno da busca do formulário, falta realização de filtros de imagens que não aparece
+const searchMovies = () => {
   fetch(searchMovie(search.value))
     .then(resposta => resposta.json())
-    .then(function(data) {
-      console.log('aqui', searchMovie(search.value))
+    .then((data) => {
       filmes.innerHTML = responseSearch(data)
     })
-  function responseSearch(data) {
+  const responseSearch = (data) => {
     return data.results
       .map(
         item =>
@@ -138,7 +144,7 @@ function searchMovies() {
   }
 }
 
-button.addEventListener('click', function(event) {
+button.addEventListener('click', (event) => {
   event.preventDefault()
   searchMovies()
 })

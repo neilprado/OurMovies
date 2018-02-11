@@ -7,14 +7,10 @@ const filmes = document.querySelector('.filmes')
 const infoFilme = document.querySelector('#infoFilme')
 const search = document.querySelector('#search')
 const button = document.querySelector('#button')
-const modal = document.querySelector('#modal')
-const genres = ''
 
 const upcomingMovies = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=pt-BR`
 const popularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`
 const nowPlayingMovies = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=pt-BR`
-const partialImgURL = (image) => `https://image.tmdb.org/t/p/w500${image}`
-const genreMovie = `https://api.themoviedb.org/3/genre/${genres}/movies?api_key=${API_KEY}&language=pt-BR`
 
 const searchMovie = (searchValue) =>
   `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=pt-BR&query=${searchValue}`
@@ -52,7 +48,6 @@ const searchMovie = (searchValue) =>
         infoFilme.innerHTML = result
       })
   }
-
 
 /* Função para retornar os filmes populares do momento */
 const getPopularMovies = () => {

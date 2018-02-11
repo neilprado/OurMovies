@@ -13,14 +13,46 @@ const genres = ''
 const upcomingMovies = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=pt-BR`
 const popularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`
 const nowPlayingMovies = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=pt-BR`
-const partialImgURL = 'https://image.tmdb.org/t/p/w500'
+const partialImgURL = (image) => `https://image.tmdb.org/t/p/w500${image}`
 const genreMovie = `https://api.themoviedb.org/3/genre/${genres}/movies?api_key=${API_KEY}&language=pt-BR`
 
 const searchMovie = (searchValue) =>
   `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=pt-BR&query=${searchValue}`
 
-/* Função para retornar os filmes populares do momento, para completar, 
- * é necessário ordenar por popularidade e inseri-la */
+  const getMovieInfo = (id) => {
+    const infoMovie = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR`
+    fetch(infoMovie)
+      .then(resposta => resposta.json())
+      .then((data) => {
+        let result = 
+          `<div><img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" width="500" height="732"></div>
+          <div class="info"><h1>${data.title}</h1><p>${data.overview}</p></div>`
+        infoFilme.innerHTML = result
+      })
+  }
+  
+  const getMovieVideos = (id) => {
+    const videoMovie = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
+    fetch(videoMovie)
+      .then(resposta => resposta.json())
+      .then((data) => {
+        infoFilme.innerHTML = `<div> <a href=www.youtube.com/watch?v=${data.key}"</div>`
+      })
+  }
+
+  const getMovieActor = (id) => {
+    const actors = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
+    fetch(actors)
+      .then(resposta => resposta.json())
+      .then((data) => {
+        let result = 
+          `<div><p>${data.name}<p></div>
+          <div><img src="https://image.tmdb.org/t/p/w500/${data.profile_path}"></div>`
+        infoFilme.innerHTML = result
+      })
+  }
+
+/* Função para retornar os filmes populares do momento */
 const getPopularMovies = () => {
   fetch(popularMovies)
     .then(resposta => resposta.json())
@@ -29,33 +61,17 @@ const getPopularMovies = () => {
     })
 
   const responsePopular = (data) => (
-    data.results/*.filter(() => 'vote_average' > 5.0
-      )*/.map(item => (
+    data.results
+      .sort((a, b) => b.vote_average - a.vote_average)
+      .map(item => (
       `<div class="imgFilme">
-        <a href="#" onclick="getMovieInfo(${item.id})">
+        <a href="javascript:;" data-fancybox="modal" data-src="#infoFilme" onclick="getMovieInfo(${item.id})">
           <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
         </a>
-      <div class="popularity">${item.vote_average}</div>
+      <div class="popularity">${item.vote_average.toFixed(1)}</div>
       <div class="nameFilme titlePopular">${item.title}</div></div>`
     )).join('')
   )
-}
-
-/*const filteredPopular = (pop) => {
-  fetch(popularMovies)
-    .then(resposta => resposta.json())
-    .then((data) =>{
-      return ${pop.vote_average} > 5.0
-    })
-}*/
-
-const getMovieInfo = (id) => {
-  const infoMovie = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR`
-  fetch(infoMovie)
-    .then(resposta => resposta.json())
-    .then((data) => {
-      infoFilme.innerHTML = `<p> ${data.title}</p>`
-    })
 }
 
 popular.addEventListener('click', () => {
@@ -74,27 +90,13 @@ const getUpcomingMovies = () => {
     return data.results
       .map(
         item =>
-          `<div class="imgFilme"><a href="#" onclick="getMovieInfo(${item.id})">
+          `<div class="imgFilme"><a href="javascript:;" data-fancybox="modal" data-src="#infoFilme" onclick="getMovieInfo(${item.id})">
             <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}"></a>
             <div class="nameFilme">${item.title}</div></div> `
       )
       .join('')
   }
 }
-
-// const getMovieInfo = (id) => {
-//   // fazer o fetch do tmdb baseado no ID
-//   fetch(URL)
-//     .then(r => r.json())
-//     .then(data => {
-//       modal.innerHTML = `
-//         <h2>${data.nome}</h2>
-//         <p>${data.description}</p>
-//       `;
-
-//       modal.style.display = 'block';
-//     })
-// }
 
 upcoming.addEventListener('click', () => {
   getUpcomingMovies()
@@ -112,7 +114,7 @@ const getPlayingNow = () => {
     return data.results
       .map(
         item =>
-          `<div class="imgFilme"><a href="#" onclick="getMovieInfo(${item.id})">
+          `<div class="imgFilme"><a href="javascript:;" data-fancybox="modal" data-src="#infoFilme" onclick="getMovieInfo(${item.id})">
             <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}"></a>
             <div class="nameFilme">${item.title}</div></div> `
       )
@@ -135,7 +137,7 @@ const searchMovies = () => {
       .map(
         item =>
           `<div class="imgFilme">
-            <a href="#" onclick="getMovieInfo(${item.id})">
+            <a href="javascript:;" data-fancybox="modal" data-src="#infoFilme" onclick="getMovieInfo(${item.id})">
               <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
             </a>
           <div class="nameFilme">${item.title}</div></div> `
@@ -151,3 +153,7 @@ button.addEventListener('click', (event) => {
 
 let a = getPopularMovies() + getPlayingNow() + getUpcomingMovies()
 filmes.insertAdjacentHTML('beforeend', a)
+
+$().fancybox({
+  //options
+});

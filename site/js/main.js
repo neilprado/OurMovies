@@ -36,7 +36,7 @@ const searchMovie = (searchValue) =>
     fetch(videoMovie)
       .then(resposta => resposta.json())
       .then((data) => {
-        infoFilme.innerHTML = `<div> <a href=www.youtube.com/watch?v=${data.key}"</div>`
+        infoFilme.innerHTML = `<div><a href="https://www.youtube.com/watch?v=${data.key}"></a></div>`
       })
   }
 
@@ -46,11 +46,13 @@ const searchMovie = (searchValue) =>
       .then(resposta => resposta.json())
       .then((data) => {
         let result = 
-          `<div><p>${data.name}<p></div>
+          `<div><p>${data.character}</p></div>
+          <div><p>${data.name}</p></div>
           <div><img src="https://image.tmdb.org/t/p/w500/${data.profile_path}"></div>`
         infoFilme.innerHTML = result
       })
   }
+
 
 /* Função para retornar os filmes populares do momento */
 const getPopularMovies = () => {

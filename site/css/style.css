@@ -79,7 +79,9 @@ a{
     box-shadow: 1px 2px #8B9492;
 }
 
-.info{
+.infoPoster{    
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     color: #000;
 }
 

@@ -1,5 +1,7 @@
+/* Chave da API */
 const API_KEY = '76a5c60d4eb397b26f90d390c849ccbf'
 
+/*  Query selectors */
 const home = document.querySelector('#home-movies')
 const popular = document.querySelector('#popular-movies')
 const upcoming = document.querySelector('#upcoming-movies')
@@ -12,59 +14,94 @@ const contentInfoMovie = document.querySelector('#info-movie')
 const search = document.querySelector('#search')
 const button = document.querySelector('#button')
 
+/* Constantes e funções com a URL da API */
 const upcomingMovies = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=pt-BR`
 const popularMovies = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR`
 const nowPlayingMovies = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=pt-BR`
 
-searchMovie = (searchValue) =>
+const searchMovie = (searchValue) =>
   `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=pt-BR&query=${searchValue}`
+const infoMovie = (id) => `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR`
+const videoMovie = (id) => `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
+const actors = (id) => `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
 
+/* Funções de Tratamento */
+const voidOverview = (data) => {
+  if (data.overview === "")
+    return data.overview = 'Sinopse indisponível em Português do Brasil, ajude-nos infomando ou traduzindo a sinopse.'
+} 
+
+const voidImage = (data) => {
+  if (data.poster_path == null)
+    return data.poster_path = `<div class="imgFilme">
+    <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieInfo(${data.id})">
+      <img src="img/noimage.jpg""width="500" height="732">
+    </a>`
+}
+
+/* Funções de obtenção de informações pelo id */
+
+const responseId = (id) => {
+  return id.results = 
+    `<div class="contentInfo">
+      <div class="imgInfo"><img src="https://image.tmdb.org/t/p/w500/${id.poster_path}
+        "width="500" height="732">
+      </div>
+      <div class="textInfo">
+        <h1>${id.title}</h1>
+        <p>${id.overview}</p>
+        <div id="atores">
+        </div>
+      </div>
+    </div>`
+}
+
+const responseVideos = (id) => {
+  return id.results = 
+    `<div><a href="https://www.youtube.com/watch?v=${id.key}"></a></div>`
+}
+
+const responseActors = (id, actors) => {
+  return id.results = 
+    `<div><p>${id.character}</p></div>
+    <div><p>${id.name}</p></div>
+    <div><img src="https://image.tmdb.org/t/p/w500/${id.profile_path}"></div>`
+}
+
+/* Função para pegar as informações pelo id do filme! */
 getMovieInfo = (id) => {
-    const infoMovie = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR`
-    fetch(infoMovie)
+    fetch(infoMovie(id))
       .then(resposta => resposta.json())
       .then((data) => {
-	if (data.overview === "")
-          data.overview = 'Sinopse indisponível em Português do Brasil, ajude-nos infomando ou traduzindo a sinopse.'
-        let result = 
-          `<div class="contentInfo">
-          <div class="imgInfo"><img src="https://image.tmdb.org/t/p/w500/${data.poster_path}
-          " width="500" height="732"></div>
-          <div class="textInfo"><h1>${data.title}</h1>
-            <p>${data.overview}</p>
-            <div id="atores">
-            </div>
-          </div>
-          </div>`
-        contentInfoMovie.innerHTML = result
+          voidOverview (data)
+          voidImage(data)          
+          contentInfoMovie.innerHTML = responseId(data)
 		
 		const atores = document.querySelector('#atores')
 		getMovieActor(id, atores)
-		
-		//console.log(result);
-      })
-  }
-  
-getMovieVideos = (id) => {
-    const videoMovie = `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
-    fetch(videoMovie)
-      .then(resposta => resposta.json())
-      .then((data) => {
-        infoMovie.innerHTML = `<div><a href="https://www.youtube.com/watch?v=${data.key}"></a></div>`
       })
   }
 
-getMovieActor = (id, atores) => {
-    const actors = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
-    fetch(actors)
+
+/* Função para pegar o trailer pelo id do filme! */  
+getMovieVideos = (id) => {
+    fetch(videoMovie(id))
       .then(resposta => resposta.json())
       .then((data) => {
-         atores.innerHTML = `<div><p>${data.character}</p></div>
-          <div><p>${data.name}</p></div>
-          <div><img src="https://image.tmdb.org/t/p/w500/${data.profile_path}"></div>`
-    
+        infoMovie.innerHTML = responseVideos(data)
       })
   }
+
+
+/* Função para pegar o casting pelo id do filme! */
+getMovieActor = (id, atores) => {
+    fetch(actors(id))
+      .then(resposta => resposta.json())
+      .then((data) => {
+         atores.innerHTML = responseActors(id, actors)
+      })
+  }
+
 
 /* Função para retornar os filmes populares do momento */
 getPopularMovies = () => {
@@ -90,7 +127,6 @@ const responsePopular = (data) => (
 }
 
 
-
 // Função para pegar os filmes que serão lançados, falta realização de filtros de data
 getUpcomingMovies = () => {
   fetch(upcomingMovies)
@@ -112,7 +148,6 @@ const responseUpcoming = (data) => {
 }
 
 
-
 // Função para retorno do que está em cartaz, falta realização de filtros de data!!
 getPlayingNow = () => {
   fetch(nowPlayingMovies)
@@ -125,8 +160,10 @@ getPlayingNow = () => {
     return data.results
       .map(
         item =>
-          `<div class="imgFilme"><a href="javascript:;" data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
-            <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}"></a>
+          `<div class="imgFilme">
+            <a href="javascript:;" data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
+              <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
+            </a>
             <div class="nameFilme">${item.title}</div></div> `
       )
       .join('')
@@ -134,15 +171,15 @@ getPlayingNow = () => {
 }
 
 
-
 // Função para retorno da busca do formulário, falta realização de filtros de imagens que não aparece
 searchMovies = () => {
   fetch(searchMovie(search.value))
     .then(resposta => resposta.json())
     .then((data) => {
+      voidImage(data)  
       contentsearchMovies.innerHTML = responseSearch(data)
     })
-	const responseSearch = (data) => {
+  const responseSearch = (data) => {
     return data.results
       .map(
         item =>

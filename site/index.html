@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="bootstrap/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" />
+  <link rel="stylesheet" type="text/css" href="css/slick.css">
+  <link rel="stylesheet" type="text/css" href="css/slick-theme.css">
   <link rel="stylesheet" href="css/style.css">
 
   <!-- Icons -->
@@ -25,16 +27,16 @@
       </div>
       <ul class="nav justify-content-center col-6 menu-principal">
         <li class="nav-item">
-          <a class="nav-link" href="#">Home</a>
+          <a class="nav-link" id="home-movies" href="javascript:(0);">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="popular-movies" href="#">Populares</a>
+          <a class="nav-link" id="popular-movies" href="javascript:(0);">Populares</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="upcoming-movies" href="#">Próximas estreias</a>
+          <a class="nav-link" id="upcoming-movies" href="javascript:(0);">Próximas estreias</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="now-playing" href="#">Em cartaz</a>
+          <a class="nav-link" id="now-playing" href="javascript:(0);">Em cartaz</a>
         </li>
       </ul>
       <nav class="navbar navbar-light col-3">
@@ -47,8 +49,11 @@
   </header>
   <main class="container">
     <div class="row">
-      <div class="col filmes"></div>
-      <div id="infoFilme"></div>
+      <div class="slider" id="content-popular-movies"></div>
+      <div class="slider" id="content-now-playing"></div>
+      <div class="slider" id="content-upcoming-movies"></div>
+      <div id="search-movies"></div>
+      <div id="info-movie"></div>
     </div>
   </main>
   <footer>
@@ -63,7 +68,7 @@
 	<script src="bootstrap/js/bootstrap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js"></script>
-  
+  <script src="js/slick.js" type="text/javascript" charset="utf-8"></script>
   <script src="js/main.js"></script>
 </body>
 

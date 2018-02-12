@@ -74,7 +74,7 @@ const responseActors = (id, actors) => {
         <div><p>${item.name}</p></div>
         <div><img src="https://image.tmdb.org/t/p/w500/${item.profile_path}"></div>`
   )
-  .join('')  
+    .join('')  
 }
 
 // Função para obtenção das próximas estreias
@@ -133,7 +133,7 @@ const responseSearch = (data) => {
 }
 
 // Função para pegar as informações pelo id do filme!
-getMovieInfo = (id) => {
+const getMovieInfo = (id) => {
     fetch(infoMovie(id))
       .then(resposta => resposta.json())
       .then((data) => {
@@ -146,7 +146,7 @@ getMovieInfo = (id) => {
 
 
 // Função para pegar o trailer pelo id do filme! 
-getMovieVideos = (id) => {
+const getMovieVideos = (id) => {
     fetch(videoMovie(id))
       .then(resposta => resposta.json())
       .then((data) => {
@@ -156,17 +156,17 @@ getMovieVideos = (id) => {
 
 
 // Função para pegar o casting pelo id do filme!
-getMovieActor = (id, atores) => {
+const getMovieActor = (id, atores) => {
     fetch(actors(id))
       .then(resposta => resposta.json())
       .then((data) => {
-         atores.innerHTML = responseActors(id, actors)
+         atores.innerHTML = responseActors(id, atores)
       })
   }
 
 
 // Função para retornar os filmes populares do momento
-getPopularMovies = () => {
+const getPopularMovies = () => {
   fetch(popularMovies)
     .then(resposta => resposta.json())
     .then((data) => {
@@ -176,7 +176,7 @@ getPopularMovies = () => {
 
 
 // Função para pegar os filmes que serão lançados, falta realização de filtros de data
-getUpcomingMovies = () => {
+const getUpcomingMovies = () => {
   fetch(upcomingMovies)
     .then(resposta => resposta.json())
     .then((data) => {
@@ -186,7 +186,7 @@ getUpcomingMovies = () => {
 
 
 // Função para retorno do que está em cartaz, falta realização de filtros de data!!
-getPlayingNow = () => {
+const getPlayingNow = () => {
   fetch(nowPlayingMovies)
     .then(resposta => resposta.json())
     .then((data) => {
@@ -196,7 +196,7 @@ getPlayingNow = () => {
 
 
 // Função para retorno da busca do formulário, falta realização de filtros de imagens que não aparece
-searchMovies = () => {
+const searchMovies = () => {
   fetch(searchMovie(search.value))
     .then(resposta => resposta.json())
     .then((data) => {

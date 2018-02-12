@@ -13,6 +13,8 @@ const contentsearchMovies = document.querySelector('#search-movies')
 const contentInfoMovie = document.querySelector('#info-movie')
 const search = document.querySelector('#search')
 const button = document.querySelector('#button')
+const atores = document.querySelector('#actors')
+const trailer = document.querySelector('#videos')
 
 /* Constantes e funções com a URL da API */
 const upcomingMovies = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=pt-BR`
@@ -50,8 +52,9 @@ const responseId = (id) => {
       <div class="textInfo">
         <h1>${id.title}</h1>
         <p>${id.overview}</p>
-        <div id="atores">
-        </div>
+        <div id="actors"></div>
+        <div id="videos">
+          <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieVideos(${id.id})">
       </div>
     </div>`
 }
@@ -66,7 +69,8 @@ const responseVideos = (id) => {
 const responseActors = (id, actors) => {
   return id.results
     .map(
-      item => `<div><p>${item.character}</p></div>
+      item => 
+        `<div><p>${item.character}</p></div>
         <div><p>${item.name}</p></div>
         <div><img src="https://image.tmdb.org/t/p/w500/${item.profile_path}"></div>`
   )
@@ -136,8 +140,6 @@ getMovieInfo = (id) => {
           voidOverview (data)
           voidImage(data)          
           contentInfoMovie.innerHTML = responseId(data)
-		
-		const atores = document.querySelector('#atores')
 		getMovieActor(id, atores)
       })
   }

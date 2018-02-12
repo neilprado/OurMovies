@@ -64,10 +64,13 @@ const responseVideos = (id) => {
 
 // Função para obtenção do casting 
 const responseActors = (id, actors) => {
-  return id.results = 
-    `<div><p>${id.character}</p></div>
-    <div><p>${id.name}</p></div>
-    <div><img src="https://image.tmdb.org/t/p/w500/${id.profile_path}"></div>`
+  return id.results
+    .map(
+      item => `<div><p>${item.character}</p></div>
+        <div><p>${item.name}</p></div>
+        <div><img src="https://image.tmdb.org/t/p/w500/${item.profile_path}"></div>`
+  )
+  .join('')  
 }
 
 // Função para obtenção das próximas estreias

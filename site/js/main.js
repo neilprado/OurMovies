@@ -21,8 +21,11 @@ const searchMovie = (searchValue) =>
       .then(resposta => resposta.json())
       .then((data) => {
         let result = 
-          `<div><img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" width="500" height="732"></div>
-          <div class="info"><h1>${data.title}</h1><p>${data.overview}</p></div>`
+          `<div class="infoPoster"><img src="https://image.tmdb.org/t/p/w500/${data.poster_path}" width="500" height="732">
+            <div class="infoName"><h1>${data.title}</h1>
+            <div class="infoName"><p>${data.overview}</p></div>
+            </div>  
+          </div>`
         infoFilme.innerHTML = result
       })
   }
@@ -32,7 +35,7 @@ const searchMovie = (searchValue) =>
     fetch(videoMovie)
       .then(resposta => resposta.json())
       .then((data) => {
-        infoFilme.innerHTML = `<div><a href="https://www.youtube.com/watch?v=${data.key}"></a></div>`
+        infoFilme.innerHTML = `<div class="infoVideo"><a href="https://www.youtube.com/watch?v=${data.key}"></a></div>`
       })
   }
 

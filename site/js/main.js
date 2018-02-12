@@ -24,8 +24,9 @@ const searchMovie = (searchValue) =>
 const infoMovie = (id) => `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=pt-BR`
 const videoMovie = (id) => `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`
 const actors = (id) => `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`
+const image = (image) => `https://image.tmdb.org/t/p/w500/${image}`
 
-/* Funções de Tratamento */
+// Funções de Tratamento de imagem e de sinopse até o momento
 const voidOverview = (data) => {
   if (data.overview === "")
     return data.overview = 'Sinopse indisponível em Português do Brasil, ajude-nos infomando ou traduzindo a sinopse.'
@@ -39,8 +40,7 @@ const voidImage = (data) => {
     </a>`
 }
 
-/* Funções de obtenção de informações pelo id */
-
+// Funções de obtenção de informações pelo id
 const responseId = (id) => {
   return id.results = 
     `<div class="contentInfo">
@@ -56,11 +56,13 @@ const responseId = (id) => {
     </div>`
 }
 
+// Função para obtenção do trailer 
 const responseVideos = (id) => {
   return id.results = 
     `<div><a href="https://www.youtube.com/watch?v=${id.key}"></a></div>`
 }
 
+// Função para obtenção do casting 
 const responseActors = (id, actors) => {
   return id.results = 
     `<div><p>${id.character}</p></div>
@@ -68,7 +70,62 @@ const responseActors = (id, actors) => {
     <div><img src="https://image.tmdb.org/t/p/w500/${id.profile_path}"></div>`
 }
 
-/* Função para pegar as informações pelo id do filme! */
+// Função para obtenção das próximas estreias
+const responseUpcoming = (data) => {
+  return data.results
+    .map(
+      item =>
+        `<div class="imgFilme"><a href="javascript:;" data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
+          <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}"></a>
+          <div class="nameFilme">${item.title}</div></div> `
+    )
+    .join('')
+}
+
+// Função para obtenção dos filmes populares do momento
+const responsePopular = (data) => {
+  data.results
+    .sort((a, b) => b.vote_average - a.vote_average)
+    .map(item => (
+    `<div class="imgFilme">
+      <a href="javascript:;" data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
+        <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
+      </a>
+      <div class="popularity">${item.vote_average.toFixed(1)}</div>
+      <div class="nameFilme titlePopular">${item.title}</div>
+    </div>`
+    )).join('')
+}
+
+// Função para obtenção do que está em cartaz
+const responseNow = (data) => {
+  return data.results
+    .map(
+      item =>
+        `<div class="imgFilme">
+          <a href="javascript:;" data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
+            <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
+          </a>
+          <div class="nameFilme">${item.title}</div></div> `
+    )
+    .join('')
+}
+
+// Função para obtenção do resultado da pesquisa
+const responseSearch = (data) => {
+  return data.results
+    .map(
+      item =>
+        `<div class="imgFilme">
+          <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
+            <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
+          </a>
+        <div class="nameFilme">${item.title}</div></div> `
+    )
+    .join('')
+}
+
+// Função para pegar as informações pelo id do filme!
 getMovieInfo = (id) => {
     fetch(infoMovie(id))
       .then(resposta => resposta.json())
@@ -83,7 +140,7 @@ getMovieInfo = (id) => {
   }
 
 
-/* Função para pegar o trailer pelo id do filme! */  
+// Função para pegar o trailer pelo id do filme! 
 getMovieVideos = (id) => {
     fetch(videoMovie(id))
       .then(resposta => resposta.json())
@@ -93,7 +150,7 @@ getMovieVideos = (id) => {
   }
 
 
-/* Função para pegar o casting pelo id do filme! */
+// Função para pegar o casting pelo id do filme!
 getMovieActor = (id, atores) => {
     fetch(actors(id))
       .then(resposta => resposta.json())
@@ -103,27 +160,13 @@ getMovieActor = (id, atores) => {
   }
 
 
-/* Função para retornar os filmes populares do momento */
+// Função para retornar os filmes populares do momento
 getPopularMovies = () => {
   fetch(popularMovies)
     .then(resposta => resposta.json())
     .then((data) => {
       contentPopularMovies.innerHTML = responsePopular(data)
     })
-
-const responsePopular = (data) => (
-    data.results
-      .sort((a, b) => b.vote_average - a.vote_average)
-      .map(item => (
-      `<div class="imgFilme">
-        <a href="javascript:;" data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
-          <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
-        </a>
-        <div class="popularity">${item.vote_average.toFixed(1)}</div>
-        <div class="nameFilme titlePopular">${item.title}</div>
-      </div>`
-    )).join('')
-  )
 }
 
 
@@ -133,18 +176,7 @@ getUpcomingMovies = () => {
     .then(resposta => resposta.json())
     .then((data) => {
       contentUpComingMovies.innerHTML = responseUpcoming(data);
-});
-
-const responseUpcoming = (data) => {
-    return data.results
-      .map(
-        item =>
-          `<div class="imgFilme"><a href="javascript:;" data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
-            <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}"></a>
-            <div class="nameFilme">${item.title}</div></div> `
-      )
-      .join('')
-  }
+  })
 }
 
 
@@ -155,19 +187,6 @@ getPlayingNow = () => {
     .then((data) => {
      contentNowPlaying.innerHTML = responseNow(data)
     })
-
-  const responseNow = (data) => {
-    return data.results
-      .map(
-        item =>
-          `<div class="imgFilme">
-            <a href="javascript:;" data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
-              <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
-            </a>
-            <div class="nameFilme">${item.title}</div></div> `
-      )
-      .join('')
-  }
 }
 
 
@@ -179,20 +198,9 @@ searchMovies = () => {
       voidImage(data)  
       contentsearchMovies.innerHTML = responseSearch(data)
     })
-  const responseSearch = (data) => {
-    return data.results
-      .map(
-        item =>
-          `<div class="imgFilme">
-            <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
-              <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
-            </a>
-          <div class="nameFilme">${item.title}</div></div> `
-      )
-      .join('')
-  }
 }
 
+/* Event Listeners!! */
 button.addEventListener('click', (event) => {
   event.preventDefault()
   contentPopularMovies.classList.add('hidden')

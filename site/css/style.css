@@ -1,91 +1,98 @@
 body {
-    background: rgba(45,55,64,1);
-    background: -moz-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(45,55,64,1)), color-stop(55%, rgba(45,55,64,1)), color-stop(85%, rgba(100,100,101,1)), color-stop(86%, rgba(102,102,102,1)), color-stop(100%, rgba(45,55,64,1)));
-    background: -webkit-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
-    background: -o-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
-    background: -ms-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
-    background: linear-gradient(to right, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d3740', endColorstr='#8B9492', GradientType=1 );
-    color: #f5f6f0;
+	background: rgba(45,55,64,1);
+	background: -moz-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(45,55,64,1)), color-stop(55%, rgba(45,55,64,1)), color-stop(85%, rgba(100,100,101,1)), color-stop(86%, rgba(102,102,102,1)), color-stop(100%, rgba(45,55,64,1)));
+	background: -webkit-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
+	background: -o-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
+	background: -ms-linear-gradient(left, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
+	background: linear-gradient(to right, rgba(45,55,64,1) 0%, rgba(45,55,64,1) 55%, rgba(100,100,101,1) 85%, rgba(102,102,102,1) 86%, rgba(45,55,64,1) 100%);
+ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d3740', endColorstr='#8B9492', GradientType=1 );
+	color: #f5f6f0;
 }
-
-a{
-    color: #f5f6f0;
+a {
+	color: #f5f6f0;
 }
-
-.topo{
-    background-color: rgba(139,148,146, .1);
-    margin-top: 25px;
-    max-width: 95%;
-    height: 80px;
+a:focus {
+	outline: none;
 }
-
-.logo{
-    height: 75px;   
+.topo {
+	background-color: rgba(139,148,146, .1);
+	margin-top: 25px;
+	max-width: 95%;
+	height: 80px;
 }
-
+.logo {
+	height: 75px;
+}
 .menu-principal {
-    display: flex;
-    align-items: center;
-    
+	display: flex;
+	align-items: center;
 }
-
 .menu-principal .nav-link {
-    padding: 5px 20px;
-    transition: .6;
+	padding: 5px 20px;
+	transition: .6;
 }
-
 .nav-link:hover {
-    color: #E08D4F;
+	color: #E08D4F;
 }
-
-.btn-outline-success{
-    color: #f5f6f0;
-    border-color: #E08D4F;
+.btn-outline-success {
+	color: #f5f6f0;
+	border-color: #E08D4F;
 }
-
-.btn:hover{
-    background-color: rgba(224,141,79, .8);
-    border-color: #E08D4F;
+.btn:hover {
+	background-color: rgba(224,141,79, .8);
+	border-color: #E08D4F;
 }
-
 .form-inline {
-    flex-flow: nowrap;
+	flex-flow: nowrap;
 }
-
-.filmes{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 15px;
-    text-align: center;
+#content-popular-movies, #content-now-playing, #content-upcoming-movies {
+	text-align: center;
 }
-
-.imgFilme img{
-    margin: 10px;
-    height: 320px;
+.imgFilme {
+	margin-right: 20px;
 }
-
+.imgFilme img {
+	margin: 10px;
+	height: 300px;
+	width: 200px;
+}
+.nameFilme {
+	max-width: 200px;
+}
 .popularity {
-    width: 50px;
-    margin: 0;
-    padding: 10px;
-    background-color: #ff4f00;
-    border-radius: 50%;
-    font-weight: 900;
-    position: relative;
-    bottom: 62px;
-    left: 208px;
-    box-shadow: 1px 2px #8B9492;
+	width: 50px;
+	height: 50px;
+	margin: -54px 0 0 168px;
+	padding: 10px;
+	background-color: #ff4f00;
+	border-radius: 50%;
+	font-weight: 900;
+	position: relative;
+	box-shadow: 1px 2px #8B9492;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
 }
-
-.infoPoster{    
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    color: #000;
+.contentInfo {
+	display: flex;
 }
-
-.titlePopular{
-    position: relative;
-    bottom: 10%;
+.imgInfo {
+	width: 500px;
+	margin-right: 25px;
+}
+.textInfo {
+	color: #000;
+	width: 300px;
+}
+.titlePopular {
+	position: relative;
+}
+#content-popular-movies.flex, #content-now-playing.flex, #content-upcoming-movies.flex, #search-movies.flex {
+	display: flex;
+	flex-wrap: wrap;
+}
+#content-popular-movies.hidden, #content-now-playing.hidden, #content-upcoming-movies.hidden, #search-movies.hidden {
+	display: none;
 }

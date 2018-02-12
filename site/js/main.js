@@ -140,12 +140,12 @@ searchMovies = () => {
     .then((data) => {
       contentsearchMovies.innerHTML = responseSearch(data)
     })
-  const responseSearch = (data) => {
+	const responseSearch = (data) => {
     return data.results
       .map(
         item =>
           `<div class="imgFilme">
-            <a href="javascript:;" onclick="getMovieInfo(${item.id})">
+            <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieInfo(${item.id})">
               <img src="https://image.tmdb.org/t/p/w500/${item.poster_path}">
             </a>
           <div class="nameFilme">${item.title}</div></div> `

@@ -32,7 +32,7 @@ const image = (image) => `https://image.tmdb.org/t/p/w500/${image}`
 const voidOverview = (data) => {
   if (data.overview === "")
     return data.overview = 'Sinopse indisponível em Português do Brasil, ajude-nos infomando ou traduzindo a sinopse.'
-} 
+}
 
 const voidImage = (data) => {
   if (data.poster_path == null)
@@ -52,7 +52,9 @@ const responseId = (id) => {
       <div class="textInfo">
         <h1>${id.title}</h1>
         <p>${id.overview}</p>
-        <div id="actors"></div>
+        <div id="actors">
+          <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieVideos(${id})">Casting</a>
+        </div>
         <div id="videos">
           <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieVideos(${id})"> Trailer </a>
         </div>
@@ -138,9 +140,9 @@ const getMovieInfo = (id) => {
       .then(resposta => resposta.json())
       .then((data) => {
           voidOverview (data)
-          voidImage(data)          
+          voidImage(data)
+          getMovieActor(id, atores)          
           contentInfoMovie.innerHTML = responseId(data)
-		getMovieActor(id, atores)
       })
   }
 
@@ -215,6 +217,25 @@ button.addEventListener('click', (event) => {
 	contentsearchMovies.classList.add('flex')
   searchMovies()
 })
+
+/* atores.addEventListener ('click', () => {
+  contentPopularMovies.classList.add('hidden')
+	contentUpComingMovies.classList.add('hidden')
+	contentNowPlaying.classList.add('hidden')
+	contentsearchMovies.classList.remove('hidden')
+	contentsearchMovies.classList.add('flex')
+  getMovieActor(id, atores)
+})
+
+trailer.addEventListener('click', ()=>{
+  event.preventDefault()
+  contentPopularMovies.classList.add('hidden')
+	contentUpComingMovies.classList.add('hidden')
+	contentNowPlaying.classList.add('hidden')
+	contentsearchMovies.classList.remove('hidden')
+  contentsearchMovies.classList.add('flex')
+  getMovieVideos(id)
+}) */
 
 
 home.addEventListener('click', () => {

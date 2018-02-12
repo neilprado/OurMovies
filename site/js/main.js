@@ -24,6 +24,8 @@ getMovieInfo = (id) => {
     fetch(infoMovie)
       .then(resposta => resposta.json())
       .then((data) => {
+	if (data.overview === "")
+          data.overview = 'Sinopse indisponível em Português do Brasil, ajude-nos infomando ou traduzindo a sinopse.'
         let result = 
           `<div class="contentInfo">
           <div class="imgInfo"><img src="https://image.tmdb.org/t/p/w500/${data.poster_path}

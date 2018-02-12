@@ -83,7 +83,7 @@ const responseUpcoming = (data) => {
 }
 
 // Função para obtenção dos filmes populares do momento
-const responsePopular = (data) => {
+const responsePopular = (data) => (
   data.results
     .sort((a, b) => b.vote_average - a.vote_average)
     .map(item => (
@@ -95,7 +95,7 @@ const responsePopular = (data) => {
       <div class="nameFilme titlePopular">${item.title}</div>
     </div>`
     )).join('')
-}
+)
 
 // Função para obtenção do que está em cartaz
 const responseNow = (data) => {

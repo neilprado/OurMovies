@@ -54,9 +54,9 @@ const responseId = (id) => {
         <p>${id.overview}</p>
         <div id="actors"></div>
         <div id="videos">
-          <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieVideos(${id.id})">
-      </div>
-    </div>`
+          <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieVideos(${id})"> Trailer </a>
+        </div>
+      </div>`
 }
 
 // Função para obtenção do trailer 

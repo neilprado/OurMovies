@@ -32,8 +32,8 @@ Foi utilizado a API TMDB para as requisições.
 
 ## Protótipos
 
-![Home](site/wireframes/home-desktop.jpg)
-![Search](site/wireframes/search-desktop.jpg)
+![Home](..site/wireframes/home-desktop.jpg)
+![Search](..site/wireframes/search-desktop.jpg)
 
 ## Contato
 Neil John - neiljohn17@gmail.com - Sistemas para Internet - IFPB

@@ -96,3 +96,22 @@ a:focus {
 #content-popular-movies.hidden, #content-now-playing.hidden, #content-upcoming-movies.hidden, #search-movies.hidden {
 	display: none;
 }
+
+.rodape {
+	background-color: rgba(139,148,146, .1);
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 20px;
+	display: flex;
+	justify-content: space-around;
+	color: #fefefe;
+	align-items: center;
+}
+
+.ourmovies{
+	font-weight: 650;
+}
+
+.api-logo{
+	height: 75px;
+}

@@ -26,7 +26,7 @@ Foi utilizado a API TMDB para as requisições.
 
 ## Inspiração
 
-![Design](wireframes/design.jpg)
+![Design](ourmovies/blob/master/site/wireframes/design.jpg)
 ![Filmow](wireframes/filmow.jpg)
 ![The Movie Database](wireframes/tmbd.jpg)
 

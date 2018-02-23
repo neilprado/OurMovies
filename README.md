@@ -26,12 +26,14 @@ Foi utilizado a API TMDB para as requisições.
 
 ## Inspiração
 
-https://dribbble.com/shots/2403683--Exploration-Movie-Streaming
-https://filmow.com
-https://www.themoviedb.org
+![Design](wireframes/design.jpg)
+![Filmow](wireframes/filmow.jpg)
+![The Movie Database](wireframes/tmbd.jpg)
 
 ## Protótipos
 
+![Home](wireframes/home-desktop.jpg)
+![Search](wireframes/search-desktop.jpg)
 
 ## Contato
 Neil John - neiljohn17@gmail.com - Sistemas para Internet - IFPB

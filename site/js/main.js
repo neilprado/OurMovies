@@ -13,8 +13,6 @@ const contentsearchMovies = document.querySelector('#search-movies')
 const contentInfoMovie = document.querySelector('#info-movie')
 const search = document.querySelector('#search')
 const button = document.querySelector('#button')
-const atores = document.querySelector('#actors')
-const trailer = document.querySelector('#videos')
 
 /* Constantes e funções com a URL da API */
 const upcomingMovies = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}&language=pt-BR`
@@ -42,6 +40,11 @@ const voidImage = (data) => {
     </a>`
 }
 
+const validateMovie = (string) => {
+  const regex = /^[a-z0-9]+$/i
+  return (string.match(regex)) ? true : false
+}
+
 // Funções de obtenção de informações pelo id
 const responseId = (id) => {
   return id.results = 
@@ -52,31 +55,7 @@ const responseId = (id) => {
       <div class="textInfo">
         <h1>${id.title}</h1>
         <p>${id.overview}</p>
-        <div id="actors">
-          <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieVideos(${id})">Casting</a>
-        </div>
-        <div id="videos">
-          <a href="javascript:;" " data-fancybox data-src="#info-movie" onclick="getMovieVideos(${id})"> Trailer </a>
-        </div>
       </div>`
-}
-
-// Função para obtenção do trailer 
-const responseVideos = (id) => {
-  return id.results = 
-    `<div><a href="https://www.youtube.com/watch?v=${id.key}"></a></div>`
-}
-
-// Função para obtenção do casting 
-const responseActors = (id, actors) => {
-  return id.results
-    .map(
-      item => 
-        `<div><p>${item.character}</p></div>
-        <div><p>${item.name}</p></div>
-        <div><img src="https://image.tmdb.org/t/p/w500/${item.profile_path}"></div>`
-  )
-    .join('')  
 }
 
 // Função para obtenção das próximas estreias
@@ -134,35 +113,15 @@ const responseSearch = (data) => {
     .join('')
 }
 
+
 // Função para pegar as informações pelo id do filme!
 const getMovieInfo = (id) => {
     fetch(infoMovie(id))
       .then(resposta => resposta.json())
       .then((data) => {
           voidOverview (data)
-          voidImage(data)
-          getMovieActor(id, atores)          
+          voidImage(data)     
           contentInfoMovie.innerHTML = responseId(data)
-      })
-  }
-
-
-// Função para pegar o trailer pelo id do filme! 
-const getMovieVideos = (id) => {
-    fetch(videoMovie(id))
-      .then(resposta => resposta.json())
-      .then((data) => {
-        infoMovie.innerHTML = responseVideos(data)
-      })
-  }
-
-
-// Função para pegar o casting pelo id do filme!
-const getMovieActor = (id, atores) => {
-    fetch(actors(id))
-      .then(resposta => resposta.json())
-      .then((data) => {
-         atores.innerHTML = responseActors(id, atores)
       })
   }
 
@@ -198,8 +157,8 @@ const getPlayingNow = () => {
 
 
 // Função para retorno da busca do formulário, falta realização de filtros de imagens que não aparece
-const searchMovies = () => {
-  fetch(searchMovie(search.value))
+const searchMovies = (data) => {
+  fetch(searchMovie(data))
     .then(resposta => resposta.json())
     .then((data) => {
       voidImage(data)  
@@ -210,32 +169,17 @@ const searchMovies = () => {
 /* Event Listeners!! */
 button.addEventListener('click', (event) => {
   event.preventDefault()
-  contentPopularMovies.classList.add('hidden')
-	contentUpComingMovies.classList.add('hidden')
-	contentNowPlaying.classList.add('hidden')
-	contentsearchMovies.classList.remove('hidden')
-	contentsearchMovies.classList.add('flex')
-  searchMovies()
+	if (validateMovie(search.value)){
+  		searchMovies(search.value)
+		contentPopularMovies.classList.add('hidden')
+		contentUpComingMovies.classList.add('hidden')
+		contentNowPlaying.classList.add('hidden')
+		contentsearchMovies.classList.remove('hidden')
+		contentsearchMovies.classList.add('flex')
+	}
+		else
+		alert("Digite um nome corretamente!")
 })
-
-/* atores.addEventListener ('click', () => {
-  contentPopularMovies.classList.add('hidden')
-	contentUpComingMovies.classList.add('hidden')
-	contentNowPlaying.classList.add('hidden')
-	contentsearchMovies.classList.remove('hidden')
-	contentsearchMovies.classList.add('flex')
-  getMovieActor(id, atores)
-})
-
-trailer.addEventListener('click', ()=>{
-  event.preventDefault()
-  contentPopularMovies.classList.add('hidden')
-	contentUpComingMovies.classList.add('hidden')
-	contentNowPlaying.classList.add('hidden')
-	contentsearchMovies.classList.remove('hidden')
-  contentsearchMovies.classList.add('flex')
-  getMovieVideos(id)
-}) */
 
 
 home.addEventListener('click', () => {

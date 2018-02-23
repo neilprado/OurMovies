@@ -17,23 +17,23 @@ Foi utilizado a API TMDB para as requisições.
 
 ## Requisitos
  ### Bibliotecas
- Bootstrap 3.3.7
- JQuery 3.3.1
+ - Bootstrap 3.3.7
+ - JQuery 3.3.1
  
  ### Plugins
- Slick 1.8.1
- Fancybox 3.2.5
+ - Slick 1.8.1
+ - Fancybox 3.2.5
 
 ## Inspiração
 
-![Design](site/wireframes/design.png)
-![Filmow](wireframes/filmow.jpg)
-![The Movie Database](wireframes/tmbd.jpg)
+![Design] (site/wireframes/design.png)
+![Filmow] (wireframes/filmow.jpg)
+![The Movie Database] (wireframes/tmbd.jpg)
 
 ## Protótipos
 
-![Home](..site/wireframes/home-desktop.jpg)
-![Search](..site/wireframes/search-desktop.jpg)
+![Home] (site/wireframes/home-desktop.jpg)
+![Search] (site/wireframes/search-desktop.jpg)
 
 ## Contato
 Neil John - neiljohn17@gmail.com - Sistemas para Internet - IFPB

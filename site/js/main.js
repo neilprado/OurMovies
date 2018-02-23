@@ -41,7 +41,7 @@ const voidImage = (data) => {
 }
 
 const validateMovie = (string) => {
-  const regex = /^[a-z0-9]+$/i
+  const regex = /^[a-z0-9]+$/gi
   return (string.match(regex)) ? true : false
 }
 

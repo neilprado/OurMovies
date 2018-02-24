@@ -35,5 +35,8 @@ Foi utilizado a API TMDB para as requisições.
 ![Home](https://github.com/neilprado/ourmovies/blob/master/site/wireframes/home-desktop.png)
 ![Search](https://github.com/neilprado/ourmovies/blob/master/site/wireframes/search-desktop.png)
 
+## Site
+![Home](https://github.com/neilprado/ourmovies/blob/master/site/wireframes/home.png)
+
 ## Contato
 Neil John - neiljohn17@gmail.com - Sistemas para Internet - IFPB
